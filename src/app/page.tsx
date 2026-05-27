@@ -50,8 +50,9 @@ export default function HomePage() {
             </h1>
             <p className="text-ril-ink-soft text-base sm:text-lg max-w-md">
               Te toca una situación municipal. Conversás con el agente. Marcá
-              las cosas que va cumpliendo. Cuando completes una línea, cantá
-              bingo y pegá la conversación para que el jurado valide.
+              las cosas que va cumpliendo en el cartón. Cuando completes una
+              línea o un bingo, cantalo en voz alta. Tu feedback es lo más
+              valioso que se lleva el taller.
             </p>
           </div>
 
