@@ -15,6 +15,8 @@ export const BINGO_CELLS: BingoCell[] = [
   { id: 8, text: "Te hizo una repregunta para entender mejor antes de cerrar la respuesta" },
 ];
 
+export const TOTAL_CELLS = BINGO_CELLS.length;
+
 const WINNING_LINES: number[][] = [
   [0, 1, 2],
   [3, 4, 5],
@@ -32,4 +34,10 @@ export function getWinningLine(marked: number[]): number[] | null {
     if (line.every((i) => set.has(i))) return line;
   }
   return null;
+}
+
+export function isFullCard(marked: number[]): boolean {
+  if (marked.length < TOTAL_CELLS) return false;
+  const set = new Set(marked);
+  return BINGO_CELLS.every((c) => set.has(c.id));
 }

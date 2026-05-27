@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { getAllClaims } from "@/lib/kv";
+import { getSlotState } from "@/lib/kv";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const claims = await getAllClaims();
-  return NextResponse.json(claims);
+  const slots = await getSlotState();
+  return NextResponse.json(slots);
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { updateClaimStatus, kvAvailable } from "@/lib/kv";
+import { updateClaimStatus, getSlotState } from "@/lib/kv";
 import { getPusherServer, CHANNEL, EVENTS } from "@/lib/pusher-server";
 import type { ClaimStatus } from "@/lib/types";
 
@@ -13,15 +13,8 @@ export async function POST(request: Request) {
 
     if (!body.id || (body.status !== "approved" && body.status !== "rejected")) {
       return NextResponse.json(
-        { error: "Parámetros inválidos" },
+        { error: "Parametros invalidos" },
         { status: 400 }
-      );
-    }
-
-    if (!kvAvailable()) {
-      return NextResponse.json(
-        { error: "Persistencia no configurada" },
-        { status: 500 }
       );
     }
 
@@ -33,17 +26,22 @@ export async function POST(request: Request) {
 
     if (!updated) {
       return NextResponse.json(
-        { error: "Bingo no encontrado" },
+        { error: "Claim no encontrado" },
         { status: 404 }
       );
     }
 
+    const newSlots = await getSlotState();
+
     const pusher = getPusherServer();
     if (pusher) {
-      await pusher.trigger(CHANNEL, EVENTS.VALIDATED, updated);
+      await Promise.all([
+        pusher.trigger(CHANNEL, EVENTS.VALIDATED, updated),
+        pusher.trigger(CHANNEL, EVENTS.SLOTS_UPDATED, newSlots),
+      ]);
     }
 
-    return NextResponse.json(updated);
+    return NextResponse.json({ claim: updated, slots: newSlots });
   } catch (e) {
     console.error("validate error", e);
     return NextResponse.json(

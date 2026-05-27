@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getAllClaims, kvAvailable } from "@/lib/kv";
+import { getAllClaims, getSlotState } from "@/lib/kv";
 import JuezDashboard from "./JuezDashboard";
 
 type SearchParams = Promise<{ key?: string }>;
@@ -16,7 +16,15 @@ export default async function JuezPage({
     redirect("/");
   }
 
-  const initialClaims = kvAvailable() ? await getAllClaims() : [];
+  const [initialClaims, initialSlots] = await Promise.all([
+    getAllClaims(),
+    getSlotState(),
+  ]);
 
-  return <JuezDashboard initialClaims={initialClaims} />;
+  return (
+    <JuezDashboard
+      initialClaims={initialClaims}
+      initialSlots={initialSlots}
+    />
+  );
 }

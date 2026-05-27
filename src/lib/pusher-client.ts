@@ -25,4 +25,6 @@ export const CHANNEL = "bingo-girsu";
 export const EVENTS = {
   CLAIMED: "claim:new",
   VALIDATED: "claim:validated",
+  SLOTS_UPDATED: "slots:updated",
+  GAME_ENDED: "game:ended",
 } as const;
