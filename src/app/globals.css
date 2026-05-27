@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --ril-cream: #efe9dd;
+  --ril-cream-light: #f5f0e6;
+  --ril-terracotta: #d65a2f;
+  --ril-terracotta-dark: #b54a25;
+  --ril-teal: #5fa5a5;
+  --ril-teal-light: #87bcbc;
+  --ril-teal-soft: #b6d3d3;
+  --ril-sage: #8fb89a;
+  --ril-ink: #2f3a3d;
+  --ril-ink-soft: #6b7578;
+  --ril-line: #c8c0b1;
+}
+
+@theme inline {
+  --color-ril-cream: var(--ril-cream);
+  --color-ril-cream-light: var(--ril-cream-light);
+  --color-ril-terracotta: var(--ril-terracotta);
+  --color-ril-terracotta-dark: var(--ril-terracotta-dark);
+  --color-ril-teal: var(--ril-teal);
+  --color-ril-teal-light: var(--ril-teal-light);
+  --color-ril-teal-soft: var(--ril-teal-soft);
+  --color-ril-sage: var(--ril-sage);
+  --color-ril-ink: var(--ril-ink);
+  --color-ril-ink-soft: var(--ril-ink-soft);
+  --color-ril-line: var(--ril-line);
+  --font-condensed: var(--font-barlow-condensed), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  color: var(--ril-ink);
+  background: var(--ril-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.headline {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--ril-ink);
+}
+
+.eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ril-terracotta);
+  font-size: 0.75rem;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop {
+  animation: pop 0.4s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(214, 90, 47, 0.55); }
+  50% { box-shadow: 0 0 0 24px rgba(214, 90, 47, 0); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 1.5s ease-out infinite;
+}
+
+@keyframes slide-in {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.4s ease-out;
+}
