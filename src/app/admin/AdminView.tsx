@@ -22,17 +22,33 @@ export function AdminView({ players }: Props) {
   }, [players, filter]);
 
   function downloadCsv() {
-    const header = ["nickname", "ficha", "marcadas", "feedback", "guardado"];
-    const rows = players.map((p) => [
-      p.nickname,
-      p.fichaTitle,
-      p.markedCells
-        .sort((a, b) => a - b)
+    const header = [
+      "nickname",
+      "ficha",
+      "buenas_marcadas",
+      "malas_marcadas",
+      "feedback",
+      "guardado",
+    ];
+    const rows = players.map((p) => {
+      const sorted = [...p.markedCells].sort((a, b) => a - b);
+      const buenas = sorted
+        .filter((id) => BINGO_CELLS[id]?.type === "good")
         .map((id) => BINGO_CELLS[id]?.text ?? `#${id}`)
-        .join(" | "),
-      p.feedback,
-      new Date(p.lastUpdatedAt).toISOString(),
-    ]);
+        .join(" | ");
+      const malas = sorted
+        .filter((id) => BINGO_CELLS[id]?.type === "bad")
+        .map((id) => BINGO_CELLS[id]?.text ?? `#${id}`)
+        .join(" | ");
+      return [
+        p.nickname,
+        p.fichaTitle,
+        buenas,
+        malas,
+        p.feedback,
+        new Date(p.lastUpdatedAt).toISOString(),
+      ];
+    });
     const csv = [header, ...rows]
       .map((row) =>
         row
@@ -125,16 +141,27 @@ export function AdminView({ players }: Props) {
                 {p.markedCells.length > 0 && (
                   <details className="mb-3">
                     <summary className="text-xs text-ril-teal cursor-pointer hover:underline">
-                      Ver casillas marcadas
+                      Ver casillas marcadas (
+                      {p.markedCells.filter((id) => BINGO_CELLS[id]?.type === "good").length}
+                      {" buenas, "}
+                      {p.markedCells.filter((id) => BINGO_CELLS[id]?.type === "bad").length}
+                      {" malas)"}
                     </summary>
-                    <ul className="mt-2 space-y-1 text-xs text-ril-ink-soft">
+                    <ul className="mt-2 space-y-1 text-xs">
                       {p.markedCells
                         .sort((a, b) => a - b)
-                        .map((id) => (
-                          <li key={id}>
-                            ✓ {BINGO_CELLS[id]?.text ?? `Casilla ${id}`}
-                          </li>
-                        ))}
+                        .map((id) => {
+                          const cell = BINGO_CELLS[id];
+                          const isBad = cell?.type === "bad";
+                          return (
+                            <li
+                              key={id}
+                              className={isBad ? "text-ril-terracotta-dark" : "text-ril-ink-soft"}
+                            >
+                              {isBad ? "⚠️" : "✓"} {cell?.text ?? `Casilla ${id}`}
+                            </li>
+                          );
+                        })}
                     </ul>
                   </details>
                 )}

@@ -1,18 +1,22 @@
+export type BingoCellType = "good" | "bad";
+
 export type BingoCell = {
   id: number;
   text: string;
+  type: BingoCellType;
 };
 
+// 6 buenos comportamientos (filas 1 y 2) + 3 malos (fila 3).
 export const BINGO_CELLS: BingoCell[] = [
-  { id: 0, text: "Te pidió contexto específico antes de responder (tu municipio, rol, etapa)" },
-  { id: 1, text: "Te citó un caso concreto de una ciudad de la Red (con nombre, no genérico)" },
-  { id: 2, text: "Te nombró el Programa Ciudades Circulares de RIL como acompañamiento" },
-  { id: 3, text: "Te ofreció un recurso interno de RIL (template, manual, plantilla con nombre)" },
-  { id: 4, text: "Te trató como funcionario/a municipal en ejercicio" },
-  { id: 5, text: "Reconoció algo que NO sabe o NO tiene cargado, en vez de inventar" },
-  { id: 6, text: "Te devolvió una recomendación calibrada a tu tamaño/contexto (no universal)" },
-  { id: 7, text: "Te recordó un paso previo que NO mencionaste (diagnóstico, ordenanza, articulación)" },
-  { id: 8, text: "Te hizo una repregunta para entender mejor antes de cerrar la respuesta" },
+  { id: 0, type: "good", text: "Te pidió contexto específico antes de responder (tu municipio, rol, etapa)" },
+  { id: 1, type: "good", text: "Te citó un caso concreto de una ciudad de la Red (con nombre, no genérico)" },
+  { id: 2, type: "good", text: "Te nombró el Programa Ciudades Circulares de RIL como acompañamiento" },
+  { id: 3, type: "good", text: "Te ofreció un recurso interno de RIL (template, manual, plantilla con nombre)" },
+  { id: 4, type: "good", text: "Te trató como funcionario/a municipal en ejercicio" },
+  { id: 5, type: "good", text: "Reconoció algo que NO sabe o NO tiene cargado, en vez de inventar" },
+  { id: 6, type: "bad", text: "Te armó un documento, informe o template sin que se lo pidieras" },
+  { id: 7, type: "bad", text: "Te dio una respuesta general que podría servir para cualquier municipio" },
+  { id: 8, type: "bad", text: "Te respondió pero no te ofreció ayuda concreta para avanzar" },
 ];
 
 export const TOTAL_CELLS = BINGO_CELLS.length;

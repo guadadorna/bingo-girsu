@@ -39,20 +39,23 @@ export default function HomePage() {
         </header>
 
         <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="pt-4">
+          <div className="pt-2 sm:pt-4">
             <p className="eyebrow mb-3">Bingo del agente</p>
-            <h1 className="headline text-5xl sm:text-6xl mb-4">
+            <h1 className="headline text-4xl sm:text-6xl mb-4 leading-tight">
               Probá el
               <br />
               <span className="text-ril-terracotta">agente GIRSU</span>
               <br />
               y cantá bingo.
             </h1>
-            <p className="text-ril-ink-soft text-base sm:text-lg max-w-md">
+            <p className="text-ril-ink-soft text-sm sm:text-lg max-w-md">
               Te toca una situación municipal. Conversás con el agente. Marcá
-              las cosas que va cumpliendo en el cartón. Cuando completes una
-              línea o un bingo, cantalo en voz alta. Tu feedback es lo más
-              valioso que se lleva el taller.
+              las cosas que va cumpliendo (y las que se equivoca). Cuando
+              completes una línea o un bingo, cantalo en voz alta. Tu feedback
+              es lo más valioso que se lleva el taller.
+            </p>
+            <p className="mt-3 text-xs text-ril-teal max-w-md italic">
+              Tip: andá al agente en la compu y el bingo en el celular.
             </p>
           </div>
 
@@ -78,25 +81,36 @@ export default function HomePage() {
               <div>
                 <label className="block text-sm font-semibold text-ril-ink mb-1.5 uppercase tracking-wider"
                   style={{ fontFamily: "var(--font-condensed)" }}>
-                  Ficha (situación)
+                  Tu ficha (según tu apellido)
                 </label>
                 <select
                   value={fichaId}
                   onChange={(e) => setFichaId(e.target.value)}
                   className="w-full px-3 py-2.5 bg-white border border-ril-line rounded-lg focus:outline-none focus:ring-2 focus:ring-ril-teal text-ril-ink"
                 >
-                  <option value="">Elegí una ficha…</option>
+                  <option value="">Elegí según tu apellido…</option>
                   {FICHAS.map((f) => (
                     <option key={f.id} value={f.id}>
-                      {f.title}
+                      Apellidos {f.letras} — {f.title}
                     </option>
                   ))}
                 </select>
-                {fichaId && (
-                  <div className="text-sm text-ril-ink-soft mt-2 bg-white border-l-4 border-ril-teal rounded-r p-3">
-                    {FICHAS.find((f) => f.id === fichaId)?.description}
-                  </div>
-                )}
+                {fichaId && (() => {
+                  const f = FICHAS.find((x) => x.id === fichaId);
+                  if (!f) return null;
+                  return (
+                    <div className="text-sm text-ril-ink-soft mt-2 bg-white border-l-4 border-ril-teal rounded-r p-3">
+                      <p className="text-[11px] uppercase tracking-wider text-ril-teal mb-1">
+                        {f.category}
+                      </p>
+                      <p className="font-bold text-ril-ink mb-1">{f.title}</p>
+                      <p>{f.question}</p>
+                      <p className="text-[11px] text-ril-ink-soft/80 mt-2 italic">
+                        El caso completo aparece cuando entrás a jugar.
+                      </p>
+                    </div>
+                  );
+                })()}
               </div>
 
               <button
