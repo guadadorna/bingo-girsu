@@ -66,7 +66,7 @@ export const FICHAS: Ficha[] = [
     category: "Generación y separación en origen · Plan de separación ciudadana",
     title: "Separación en origen",
     situation:
-      "Sos Coordinadora GIRSU de Rafaela (Santa Fe, 100.000 hab.). La ciudad tiene recolección diferenciada en algunas zonas, pero la separación en origen de la ciudadanía es muy baja: la mayoría saca todo junto. No hay un plan formal de separación: hubo campañas sueltas en redes, pero sin continuidad ni seguimiento. La planta de recuperación recibe mucho rechazo por la falta de separación previa.",
+      "Sos Coordinadora GIRSU de Sunchales (Santa Fe, 25.000 hab.). La ciudad tiene recolección diferenciada en algunas zonas, pero la separación en origen de la ciudadanía es muy baja: la mayoría saca todo junto. No hay un plan formal de separación: hubo campañas sueltas en redes, pero sin continuidad ni seguimiento. La planta de recuperación recibe mucho rechazo por la falta de separación previa.",
     question:
       "Tenemos recolección diferenciada pero la gente no separa. ¿Cómo arrancar un plan real de separación en origen que funcione y no quede solo en campaña de redes?",
     followUps: [
@@ -102,10 +102,10 @@ export const FICHAS: Ficha[] = [
     question:
       "Separamos los residuos secos pero igual van todos al relleno porque no tenemos adónde mandarlos. ¿Cómo resuelvo el destino de los secos?",
     followUps: [
-      "¿Qué tipo de convenio tengo que firmar? ¿Quién lo redacta?",
+      "¿Qué tipo de convenio tengo que firmar con una cooperativa para entregarle los materiales reciclables?",
       "¿Quién paga el flete, el municipio o la planta receptora?",
       "¿Cómo sé si los materiales que mando tienen suficiente calidad para ser aceptados?",
-      "¿Cómo formalizo la cooperativa de recuperadores para que pueda ser contraparte legal?",
+      "¿Qué necesitaría para arrancar el proceso de armado de una planta municipal en mi ciudad?",
     ],
   },
   {
@@ -152,7 +152,7 @@ export const FICHAS: Ficha[] = [
     followUps: [
       "¿Qué dice la Ley Nacional 25.916 que no puedo ignorar en la ordenanza?",
       "¿Cómo defino los grandes generadores en el texto? ¿Qué umbral de volumen uso?",
-      "¿Cómo hago para que la ordenanza no quede en letra muerta?",
+      "¿Cómo hago para que la ordenanza no quede aprobada pero sin implementación?",
       "¿Hay modelos de ordenanza de otras ciudades argentinas que pueda usar como base?",
     ],
   },
